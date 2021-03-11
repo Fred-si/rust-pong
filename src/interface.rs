@@ -5,6 +5,10 @@ use std::sync::{Arc, Mutex};
 pub type Places = [Place; 2];
 pub type SharedContext = Arc<Mutex<Context>>;
 
+// Temporary value for waiting to choose how to set context size
+// TODO: delete this
+const CONTEXT_HEIGHT: f32 = 10.0;
+
 #[derive(Clone, Copy)]
 pub struct Context {
     pub places: Places,
@@ -21,7 +25,7 @@ impl Context {
     pub fn new() -> Self {
         Self {
             places: [Place::Empty; 2],
-            ball: Ball::new(),
+            ball: Ball::new(CONTEXT_HEIGHT),
         }
     }
     pub fn update(&mut self) {
