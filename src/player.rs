@@ -1,3 +1,4 @@
+use crate::ball::Racket;
 use std::net::SocketAddr;
 
 #[derive(Clone, Copy)]
@@ -22,5 +23,11 @@ impl Player {
         let y = self.y.to_le_bytes();
         let vy = self.vy.to_le_bytes();
         [y[0], y[1], y[2], y[3], vy[0], vy[1], vy[2], vy[3]]
+    }
+}
+
+impl Racket for Player {
+    fn get_bounce_value_at(&self, _y: f32) -> Option<f32> {
+        unimplemented!();
     }
 }

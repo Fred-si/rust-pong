@@ -8,6 +8,7 @@ pub type SharedContext = Arc<Mutex<Context>>;
 // Temporary value for waiting to choose how to set context size
 // TODO: delete this
 const CONTEXT_HEIGHT: f32 = 10.0;
+const CONTEXT_WIDTH: f32 = 10.0;
 
 #[derive(Clone, Copy)]
 pub struct Context {
@@ -25,7 +26,7 @@ impl Context {
     pub fn new() -> Self {
         Self {
             places: [Place::Empty; 2],
-            ball: Ball::new(CONTEXT_HEIGHT),
+            ball: Ball::new(CONTEXT_HEIGHT, CONTEXT_WIDTH),
         }
     }
     pub fn update(&mut self) {
@@ -35,7 +36,9 @@ impl Context {
         if let Place::Player(mut player) = self.places[1] {
             player.update();
         }
-        self.ball.update();
+        if let [Place::Player(left), Place::Player(right)] = self.places {
+            self.ball.update([&left, &right]);
+        }
     }
     pub fn serialize(&self) -> Vec<u8> {
         let mut output = Vec::with_capacity(32);
