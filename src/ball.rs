@@ -31,7 +31,7 @@ impl Ball {
             min_x: -max_x,
         }
     }
-    pub fn update(&mut self, _rackets: [&dyn Racket; 2]) {
+    pub fn update(&mut self, _rackets: [impl Racket; 2]) {
         // TODO: collision with player
         self.x += self.vx;
         self.y += self.vy;
@@ -82,8 +82,8 @@ mod tests {
         }
     }
 
-    fn get_player_stubs<'a>() -> [&'a dyn Racket; 2] {
-        [&PlayerStub {}, &PlayerStub {}]
+    fn get_player_stubs() -> [impl Racket; 2] {
+        [PlayerStub {}, PlayerStub {}]
     }
 
     mod bounce_against_border {

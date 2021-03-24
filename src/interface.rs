@@ -37,7 +37,7 @@ impl Context {
             player.update();
         }
         if let [Place::Player(left), Place::Player(right)] = self.places {
-            self.ball.update([&left, &right]);
+            self.ball.update([left, right]);
         }
     }
     pub fn serialize(&self) -> Vec<u8> {
