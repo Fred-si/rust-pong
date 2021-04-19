@@ -41,10 +41,12 @@ rand = "0.8.3"
 [[bin]]
 name = "server"
 path = "src/server.rs"
+required-features = ["native"]
 
 [[bin]]
 name = "client"
 path = "src/client.rs"
+required-features = ["native"]
 
 [[bin]]
 name = "front"
